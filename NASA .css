@@ -1,0 +1,99 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: black; color: white; overflow-x: hidden; }
+
+canvas { position: fixed; inset: 0; z-index: -1; }
+
+/* صفحات الهوم والمهمة */
+#home-page, #mission-page {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden-page {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-20px);
+}
+
+/* Header & Text */
+header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 25px; }
+header h1 { font-size: 4rem; text-shadow: 0 0 20px #1e90ff; letter-spacing: 2px; }
+
+/* Neon Button */
+#home-page button {
+    padding: 15px 40px; background: transparent; color: #00d4ff; border: 2px solid #00d4ff;
+    border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: 0.4s;
+    animation: neonPulse 2s infinite;
+}
+#home-page button:hover { background: #00d4ff; color: #000; box-shadow: 0 0 40px #00d4ff; transform: scale(1.1); }
+@keyframes neonPulse { 0%, 100% { box-shadow: 0 0 10px #00d4ff; } 50% { box-shadow: 0 0 25px #00d4ff; } }
+
+/* Cards & Dashboard */
+section { padding: 40px 20px; text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); margin: 20px; }
+.cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+.card { width: 130px; height: 180px; perspective: 1000px; cursor: pointer; }
+.card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.7s; }
+.card.flipped .card-inner { transform: rotateY(180deg); }
+.card-face { position: absolute; width: 100%; height: 100%; border-radius: 15px; backface-visibility: hidden; overflow: hidden; }
+.card-front img { width: 100%; height: 100%; object-fit: cover; }
+.card-back { background: #0b1d3a; transform: rotateY(180deg); display: flex; align-items: center; justify-content: center; padding: 10px; color: white; font-size: 0.75rem; text-align: center; }
+.planet-back-img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; }
+
+/* Scanner */
+.scanner-line { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: #00ff7f; box-shadow: 0 0 10px #00ff7f; z-index: 5; display: none; }
+.card.flipped .scanner-line { display: block; animation: scan 1.5s ease-in-out infinite alternate; }
+@keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+/* AI Section */
+#ai { background: rgba(10, 20, 40, 0.6); border: 1px solid #1e90ff; padding: 40px; max-width: 700px; margin: 40px auto; border-radius: 10px; }
+#question { width: 70%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid #1e90ff; color: white; border-radius: 5px 0 0 5px; outline: none; }
+#ai button { padding: 15px 25px; background: #1e90ff; border: none; border-radius: 0 5px 5px 0; color: white; cursor: pointer; }
+
+/* HUD & Alerts */
+.hud-corner { position: fixed; width: 40px; height: 40px; border: 3px solid #1e90ff; z-index: 2000; pointer-events: none; filter: drop-shadow(0 0 5px #1e90ff); animation: hudPulse 2s infinite alternate; }
+.top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.top-right { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+@keyframes hudPulse { from { opacity: 0.4; } to { opacity: 1; } }
+
+.space-alert { position: fixed; top: 50%; right: -350px; transform: translateY(-50%); width: 300px; padding: 20px; background: rgba(255, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid #ff4d4d; border-radius: 10px; color: white; z-index: 2500; transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); opacity: 0; }
+.space-alert.show { right: 20px; opacity: 1; animation: alertShake 0.5s; }
+@keyframes alertShake { 0%, 100% { transform: translateY(-50%) translateX(0); } 25% { transform: translateY(-50%) translateX(-5px); } 75% { transform: translateY(-50%) translateX(5px); } }
+
+.floating-img { position: absolute; z-index: 1; pointer-events: none; animation-duration: 6s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+.astronaut { width: 200px; top: 15%; left: 5%; animation-name: floatAstro; }
+.satellite { width: 150px; bottom: 15%; right: 5%; animation-name: floatSatellite; }
+@keyframes floatAstro { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
+@keyframes floatSatellite { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(20px); } }
+
+.back-btn { position: fixed; top: 20px; left: 20px; z-index: 3000; background: rgba(0,0,0,0.5); border: 1px solid white; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+
+footer {
+    position: fixed; /* تثبيت في الشاشة */
+    bottom: 0;       /* في أقصى الأسفل */
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent); /* خلفية سوداء متدرجة لضمان وضوح الاسم فوق النجوم */
+    z-index: 3000;   /* ليكون فوق الكانفاس والنجوم */
+    pointer-events: none; /* عشان ميغطيش على أي زرار لو جه فوقه */
+}
+
+.project-info {
+    font-size: 0.8rem;
+    color: #1e90ff;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+
+.my-name {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}

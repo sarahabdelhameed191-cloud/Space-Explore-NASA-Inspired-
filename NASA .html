@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Space Explorer</title>
+    <link rel="stylesheet" href="NASA .css">
+</head>
+<body>
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <div id="space-alert" class="space-alert">
+        <p id="alert-message"></p>
+    </div>
+
+    <canvas id="stars"></canvas>
+
+    <div id="home-page">
+        <img src="images/astronaut.png" class="floating-img astronaut" alt="Astronaut">
+        <img src="images/satellite.png" class="floating-img satellite" alt="Satellite">
+        <header>
+            <h1>🚀 AI Space Explorer</h1>
+            <p>Explore the Solar System with AI assistance</p>
+            <button onclick="startMission()">Start Mission</button>
+        </header>
+    </div>
+
+    <div id="mission-page" class="hidden-page">
+        <button class="back-btn" onclick="goHome()">⬅ Back to Home</button>
+        
+        <section id="dashboard">
+            <h2>🪐 Solar System</h2>
+            <div class="cards" id="planetCards"></div>
+            <p id="planetInfo">Select a planet to see details</p>
+        </section>
+
+        <section id="ai">
+            <h2>🤖 AI Space Assistant</h2>
+            <div class="ai-input-group" style="display: flex; justify-content: center;">
+                <input type="text" id="question" placeholder="Ask about space...">
+                <button onclick="askAI()">Ask AI</button>
+            </div>
+            <p id="aiResponse"></p>
+        </section>
+    </div>
+
+<footer>
+        <p class="project-info">NASA Inspired</p>
+        <p class="my-name">Sarah Abdelhameed's Project</p>
+    </footer>
+
+    <script src="NASA .js"></script>
+</body>
+</body>
+</html>
